@@ -95,7 +95,7 @@
         .then(() => Scratch.fetch(url, {
           headers: {
             'X-Requested-With': 'XMLHttpRequest',
-            'Origin': 'https://turbowarp.org'
+            'Origin': 'https://studio.penguinmod.com'
           }
         }))
         .then(response => {
@@ -344,7 +344,7 @@
           return 'Stats not available';
         })
         .catch(error => {
-          this.lastError = 'Network error: ${error.message}`;
+          this.lastError = `Network error: ${error.message}`;
           if (error.message.includes('429')) this.lastError = 'Too Many Requests (429)';
           return this.lastError;
         });
