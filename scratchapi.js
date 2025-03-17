@@ -124,14 +124,14 @@
 
           const formattedResults = data.map(project => {
             return (
-              `projectName=${project.title}|||projectAuthor=${project.username}|||projectViews=${project.views}|||projectLikes=${project.loves}|||projectLink=https://scratch.mit.edu/projects/${project.id}`
+              `projectName=${project.title}|||projectAuthor=${project.author.username}|||projectViews=${project.stats.views}|||projectLikes=${project.stats.loves}|||projectLink=https://scratch.mit.edu/projects/${project.id}`
             );
           });
 
           this.searchResults = this.searchResults.concat(formattedResults);
           this.currentOffset += 15;
           this.lastError = 'Нет ошибок';
-          return formattedResults.join(';;;');
+          return formattedResults.join('--------------------------------------');
         })
         .catch(error => {
           this.lastError = `Network error: ${error.message}`;
@@ -146,7 +146,7 @@
         return 'No search results';
       }
       this.lastError = 'Нет ошибок';
-      return this.searchResults.join(';;;');
+      return this.searchResults.join('--------------------------------------');
     }
 
     resetSearch() {
@@ -344,7 +344,7 @@
           return 'Stats not available';
         })
         .catch(error => {
-          this.lastError = `Network error: ${error.message}`;
+          this.lastError = 'Network error: ${error.message}`;
           if (error.message.includes('429')) this.lastError = 'Too Many Requests (429)';
           return this.lastError;
         });
